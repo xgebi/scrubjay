@@ -5,8 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Scrubjay | Style guide</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  <link rel="stylesheet" type="text/css" href="css/prism.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
   <script src="main.js"></script>
+  <script src="js/prism.js"></script>
 </head>
 <body>
   <header>
@@ -14,33 +16,68 @@
     <nav>
       <ul>
         <li>
-          <a href="#colors">Colors</a>
-        </li>
-        <li>
-          <a href="#typography">Typography</a>
-        </li>
-        <li>
-          <a href="#forms">Forms</a>
-        </li>
-        <li>
-          <a href="#tables">Tables</a>
+          <a href="#">Atoms</a>
+          <ul>
+            <li>
+              <a href="#colors">Colors</a>
+            </li>
+            <li>
+              <a href="#typography">Typography</a>
+            </li>
+            <li>
+              <a href="#forms">Forms</a>
+            </li>
+            <li>
+              <a href="#tables">Tables</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
   </header>
   <main>
-    <div id="colors">
+    <section id="atoms">
+      <h1>Basic atoms</h1>
+      <div id="colors">
+        <h2>Colors</h2>
+      </div>
+      <div id="typography">
+        <h2>Typography</h2>
+        <h1>H1 heading</h1>
+        <code class="language-markup">&lt;h1>H1 heading&lt;/h1></code>
+        <h2>H2 heading</h2>
+        <code class="language-markup">&lt;h2>H2 heading&lt;/h2></code>
+        <h3>H3 heading</h3>
+        <code class="language-markup">&lt;h3>H3 heading&lt;/h3></code>
+        <h4>H4 heading</h4>
+        <code class="language-markup">&lt;h4>H4 heading&lt;/h4></code>
+        <h5>H5 heading</h5>
+        <code class="language-markup">&lt;h5>H5 heading&lt;/h5></code>
+        <h6>H6 heading</h6>
+        <code class="language-markup">&lt;h6>H6 heading&lt;/h6></code>
 
-    </div>
-    <div id="typography">
+        <p class="styleguide-italic">This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text. This is italic text.</p>
 
-    </div>
-    <div id="forms">
+        <p class="styleguide-bold">This is bold text. This is bold text. This is bold text. This is bold text. This
+          is bold text. This is bold text. This is bold text. This is bold text. This is bold text. This is bold
+          text. This is bold text. This is bold text.</p>
 
-    </div>
-    <div id="tables">
-      
-    </div>
+        <p class="styleguide-bold-italic">This is bold and italic text. This is bold and italic text. This is bold and italic text. This is bold and italic text. This
+          is bold and italic text. This is bold and italic text. This is bold and italic text. This is bold and italic text. This is bold and italic text. This is bold and italic
+          text. This is bold and italic text. This is bold and italic text.</p>
+      </div>
+      <div id="forms">
+        <h2>Forms</h2>
+        <input type="text" />
+        <br />
+        <textarea></textarea>
+        <br />
+        <button>Button</button>
+      </div>
+      <div id="tables">
+        <h2>Tables</h2>
+      </div>
+    </section>
   </main>
 </body>
 </html>

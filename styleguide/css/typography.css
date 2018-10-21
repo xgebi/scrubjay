@@ -1,0 +1,50 @@
+/*  Typography  */
+@font-face {
+  font-family: 'Mali';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Mali Regular'), local('Mali-Regular'), url('../fonts/Mali-Regular.ttf') format('ttf');
+}
+
+body {
+  font-family: 'Mali', sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1.125rem;
+}
+
+
+/* Styleguide only  */
+.styleguide-italic {
+  font-style: italic;
+}
+
+.styleguide-bold {
+  font-weight: bold;
+}
+
+.styleguide-bold-italic {
+  font-style: italic;
+  font-weight: bold;
+}
