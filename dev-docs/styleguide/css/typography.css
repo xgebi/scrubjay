@@ -8,6 +8,7 @@
 
 body {
   font-family: 'Mali', sans-serif;
+  color: var(--secondary-dark-color);  
 }
 
 h1 {

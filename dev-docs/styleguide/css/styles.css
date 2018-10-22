@@ -1,4 +1,7 @@
 @import "styleguide.css";
 
+@import "colors.css";
 @import "typography.css";
 @import "forms.css";
+
+@import "layout.css";

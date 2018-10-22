@@ -1,0 +1,8 @@
+:root {
+  --main-color: hsla(217, 51%, 42%, 1);
+  --secondary-color: hsla(216, 46%, 50%, 1);
+  --main-light-color: hsla(215, 39%, 88%, 1);
+  --secondary-light-color: hsla(215, 81%, 96%, 1);
+  --main-dark-color: hsla(270, 15%, 18%, 1);
+  --secondary-dark-color: hsla(217, 45%, 20%, 1);
+}
