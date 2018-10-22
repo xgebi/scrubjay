@@ -34,6 +34,22 @@ h6 {
   font-size: 1.125rem;
 }
 
+a {
+  color: purple;
+}
+
+a:visited {
+  color: darkblue;
+}
+
+a:hover {
+  color: blue;
+  outline: 1px solid blue;
+}
+
+a:active {
+  color: green;
+}
 
 /* Styleguide only  */
 .styleguide-italic {
@@ -47,4 +63,21 @@ h6 {
 .styleguide-bold-italic {
   font-style: italic;
   font-weight: bold;
+}
+
+.styleguide-normal-link {
+  color: purple;
+}
+
+.styleguide-visited-link {
+  color: darkblue;
+}
+
+.styleguide-hover-link {
+  color: blue;
+  outline: 1px solid blue;
+}
+
+.styleguide-active-link {
+  color: green;
 }
