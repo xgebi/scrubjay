@@ -1,0 +1,29 @@
+.styleguide-italic {
+  font-style: italic;
+}
+
+.styleguide-bold {
+  font-weight: bold;
+}
+
+.styleguide-bold-italic {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.styleguide-normal-link {
+  color: purple;
+}
+
+.styleguide-visited-link {
+  color: darkblue;
+}
+
+.styleguide-hover-link {
+  color: blue;
+  outline: 1px solid blue;
+}
+
+.styleguide-active-link {
+  color: green;
+}
