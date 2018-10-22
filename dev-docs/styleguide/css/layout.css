@@ -24,6 +24,17 @@ body {
   grid-row-gap: 1rem;
 }
 
+.upper-nav-bar ul {
+  display: flex;
+  flex: 1 1 auto;
+  list-style: none;
+  justify-content: center;
+}
+
+.upper-nav-bar ul li {
+  margin: .5rem;
+}
+
 header {
   background: var(--main-light-color);
   padding: 1rem;

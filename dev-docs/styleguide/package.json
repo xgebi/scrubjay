@@ -1,0 +1,16 @@
+{
+  "name": "scrubjay-styleguide",
+  "version": "0.0.1",
+  "description": "Styleguide for Scrubjay project",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sarah Gebauer",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-cssimport": "^7.0.0",
+    "gulp-minify-css": "^1.2.4"
+  }
+}
