@@ -1,0 +1,44 @@
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
+}
+
+.login-form div {
+  display: grid;
+  grid-template: "logo logo"
+                 "msg msg"
+                 "username-label username-input"
+                 "password-label password-input"
+                 "forgotten login";
+  
+}
+
+.login-form.login-error div {
+  grid-template: "logo logo"
+                 "msg msg"
+                 "error error"
+                 "username-label username-input"
+                 "password-label password-input"
+                 "forgotten login";
+  
+}
+
+.login-form div h1 {
+  grid-area: logo;
+  text-align: center;
+}
+
+.login-form div .login-message {
+  grid-area: msg;
+  text-align: center;
+}
+
+.login-form div .login-error-message {
+  grid-area: error;
+  text-align: center;
+}
+
+.login-form div #login-button {
+  grid-area: login;
+}
