@@ -1,0 +1,1 @@
+// here is a code handling registration of a new user

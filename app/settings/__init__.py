@@ -8,7 +8,8 @@ class Settings(Resource):
     settings = Setting.query.all()
     if (len(settings) == 0):
       return "{ settings: [] }"
-    return json.dump(settings)
+    encoder = SettingEncoder()    
+    return '{ "settings":' + encoder.encode(settings) + '}'
 
   def put(self, updated_settings):
     old_settings = Settings.query.all()
@@ -17,4 +18,9 @@ class Settings(Resource):
       print(attr, value)
     return "{ error: true }", 201
 
-
+class SettingEncoder(json.JSONEncoder):
+    def default(self, setting):
+        if isinstance(setting, Setting):
+            return (setting.settings_name, setting.settings_value)
+        else:
+            super().default(self, setting)
