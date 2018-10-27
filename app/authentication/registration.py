@@ -1,8 +1,29 @@
 from flask_restful import reqparse, abort, Api, Resource
+from sqlalchemy.exc import InvalidRequestError
+from passlib.hash import bcrypt_sha256
+
 from app.authentication.models import User
+from app import db
 
 class Registration(Resource):
   def post(self):
-    user = User.query.get()
+    parser = reqparse.RequestParser()
+    parser.add_argument('username')
+    parser.add_argument('password')
+    parser.add_argument('email')
+    parser.add_argument('displayName')
+    args = parser.parse_args()
 
-    return "{ login: [] }"
+    test_user = User.query.get(args.username)
+    if (test_user):
+      return "{'registrationError': true, 'userExists': true}"
+
+    password = bcrypt_sha256.hash(args.password)
+    try:
+      user = User(args.username, password, args.display_name, args.email, None, None)
+      db.session.add(user)
+      db.session.commit()
+    except InvalidRequestError:
+      return "{'registrationError': true, 'databaseError': true}"
+
+    return "{'registrationError': false}"

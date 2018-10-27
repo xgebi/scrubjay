@@ -21,5 +21,8 @@ def create_app(config_type):
   from app.authentication.authentication import Authentication
   api.add_resource(Authentication, "/api/login")
 
+  from app.authentication.registration import Registration
+  api.add_resource(Registration, "/api/register")
+
   return app
   
