@@ -41,6 +41,11 @@
 .login-form div .login-error-message {
   grid-area: error;
   text-align: center;
+  display: none;
+}
+
+.login-form.login-error div .login-error-message {
+  display: block;
 }
 
 .login-form div #login-button {

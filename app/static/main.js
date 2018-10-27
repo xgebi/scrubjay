@@ -8,6 +8,27 @@ var notLoggedIn = true;
 var spa;
 
 window.addEventListener("load", function() {
+  window.addEventListener("popstate", function (event) {
+    if (!notLoggedIn) {
+      switch(event.target.location.hash) {
+        case "#settings":
+          settingsScreen();
+          break;
+
+        default: errorScreen();
+      }
+    } else {
+      switch(event.target.location.href) {
+        case "#register":
+          registerScreen();
+          break;
+        case "forgotten":
+          forgottenScreen();
+          break;
+      }
+    }
+  });
+
   spa = document.querySelector("#spa");
   if (notLoggedIn) {
     let loginButton = document.querySelector("#login-button");
@@ -29,5 +50,28 @@ window.addEventListener("load", function() {
         body: JSON.stringify(body)
       });
     });
+  }
+
+  function forgottenScreen() {
+    while (spa.firstChild) {
+      spa.removeChild(spa.firstChild);
+    }
+  }
+
+  function registerScreen() {
+    while (spa.firstChild) {
+      spa.removeChild(spa.firstChild);
+    }
+  }
+
+  function settingsScreen() {
+
+  }
+
+  function errorScreen() {
+    let main = document.querySelector("main");
+    while (main.firstChild) {
+      main.removeChild(main.firstChild);
+    }
   }
 });
