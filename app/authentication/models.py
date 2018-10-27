@@ -10,13 +10,14 @@ class User(db.Model):
   cookie_session_uid = db.Column(db.String(50))
   last_active_timedate = db.Column(db.DateTime)
   email = db.Column(db.String(360))
+  user_permissions = db.Column(db.String(20))
 
 
-
-  def __init__(self, username, password, display_name, email, current_session_uid, cookie_session_uid):
+  def __init__(self, username, password, display_name, email, current_session_uid, cookie_session_uid, user_permissions):
     self.username = username
     self.password = password
     self.display_name = display_name
     self.email = email
     self.current_session_uid = current_session_uid
     self.cookie_session_uid = cookie_session_uid
+    self.user_permissions = user_permissions

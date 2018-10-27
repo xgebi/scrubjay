@@ -1,0 +1,1 @@
+ALTER TABLE scrubjay_users ADD COLUMN user_permissions varchar(20);

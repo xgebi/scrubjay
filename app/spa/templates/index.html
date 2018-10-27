@@ -6,10 +6,16 @@
   <title>Scrubjay - Data gathering tool</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="static/main.css" />
-  <script src="static/main.js"></script>
+  <script src="static/main.js"></script> 
+  {% if not configured %}
+  <script type="application/javascript">
+    history.pushState({}, "Register Admin", "#register");
+    var createAdminUser = true;
+  </script>
+  {% endif %}
 </head>
 <body>
-  <main id="spa">
+  <main id="spa">    
     <form class="login-form">
       <div>
         <h1>Scrubjay</h1>
