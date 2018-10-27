@@ -8,9 +8,12 @@ var notLoggedIn = true;
 var spa;
 
 window.addEventListener("load", function() {
-  window.addEventListener("popstate", function (event) {
+  window.addEventListener("popstate", routing);
+  routing();
+
+  function routing() {
     if (!notLoggedIn) {
-      switch(event.target.location.hash) {
+      switch (window.location.hash) {
         case "#settings":
           settingsScreen();
           break;
@@ -18,49 +21,83 @@ window.addEventListener("load", function() {
         default: errorScreen();
       }
     } else {
-      switch(event.target.location.href) {
+      switch (window.location.hash) {
         case "#register":
           registerScreen();
           break;
-        case "forgotten":
+        case "#forgotten":
           forgottenScreen();
           break;
+        case "#password-reset":
+          break;
+        default: loginScreen();        
       }
     }
-  });
+  }
 
   spa = document.querySelector("#spa");
-  if (notLoggedIn) {
+  function loginScreen() {
     let loginButton = document.querySelector("#login-button");
     loginButton.addEventListener("click", function(event) {
       event.preventDefault();
-      debugger;
+      
       let username = document.querySelector("#username").value;
       let password = document.querySelector("#password").value;
       let body = {
         username: username,
         password: password
       };
-      console.log(window.location.href + "login");
-      fetch(window.location.href + "login", {
+      let href = window.location.href.substr(0, window.location.href.indexOf("#"));
+      fetch(href + "api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
         },
         body: JSON.stringify(body)
+      }).then((result) => {
+        console.log(result);
       });
     });
   }
 
   function forgottenScreen() {
-    while (spa.firstChild) {
-      spa.removeChild(spa.firstChild);
+    let loginFormDiv = document.querySelector(".login-form div");
+    while (loginFormDiv.firstChild) {
+      loginFormDiv.removeChild(loginFormDiv.firstChild);
     }
+    let forgottenMessage = document.createElement("p");
+    forgottenMessage.setAttribute("class", "login-message");
+    forgottenMessage.textContent = "Please, enter your email which you used during registration";
+
+    let registrationEmail = document.createElement("input");
+    registrationEmail.setAttribute("type", "email");
+    registrationEmail.setAttribute("id", "registration-email");
+
+    let forgottenButton = document.createElement("button");
+    forgottenButton.textContent = "Reset password";
+    forgottenButton.addEventListener('click', function() {
+      let href = window.location.href.substr(0, window.location.href.indexOf('#'));
+      
+      fetch(href + "api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(body)
+      }).then(result => {
+        console.log(result);
+      });
+    });
+
+    loginFormDiv.appendChild(forgottenMessage);
+    loginFormDiv.appendChild(registrationEmail);
+    loginFormDiv.appendChild(forgottenButton);
   }
 
   function registerScreen() {
-    while (spa.firstChild) {
-      spa.removeChild(spa.firstChild);
+    let loginFormDiv = document.querySelector(".login-form div");
+    while (loginFormDiv.firstChild) {
+      loginFormDiv.removeChild(loginFormDiv.firstChild);
     }
   }
 

@@ -16,10 +16,10 @@ def create_app(config_type):
   app.register_blueprint(spa)  # register blueprint
   
   from app.settings import Settings
-  api.add_resource(Settings, "/settings")
+  api.add_resource(Settings, "/api/settings")
 
   from app.authentication import Authentication
-  api.add_resource(Authentication, "/login")
+  api.add_resource(Authentication, "/api/login")
 
   return app
   
