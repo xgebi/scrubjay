@@ -77,8 +77,8 @@ window.addEventListener("load", function() {
     forgottenButton.textContent = "Reset password";
     forgottenButton.addEventListener('click', function() {
       let href = window.location.href.substr(0, window.location.href.indexOf('#'));
-      
-      fetch(href + "api/login", {
+
+      fetch(href + "api/forgotten", {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8"

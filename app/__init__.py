@@ -18,7 +18,7 @@ def create_app(config_type):
   from app.settings import Settings
   api.add_resource(Settings, "/api/settings")
 
-  from app.authentication import Authentication
+  from app.authentication.authentication import Authentication
   api.add_resource(Authentication, "/api/login")
 
   return app
