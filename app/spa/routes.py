@@ -7,7 +7,7 @@ from app.settings.models import Setting
 @spa.route('/')
 def display_spa():
   configured = Setting.query.get('configured')
-  if (configured and configured.settings_value):
+  if (configured is not None and configured.settings_value):
     return render_template('index.html', configured=configured)
   else:
     return render_template('configure.html')

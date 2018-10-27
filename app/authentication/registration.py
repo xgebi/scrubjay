@@ -15,7 +15,7 @@ class Registration(Resource):
     args = parser.parse_args()
 
     test_user = User.query.get(args.username)
-    if (test_user):
+    if (test_user is not None):
       return "{'registrationError': true, 'userExists': true}"
 
     password = bcrypt_sha256.hash(args.password)
