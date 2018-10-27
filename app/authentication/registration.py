@@ -12,6 +12,7 @@ class Registration(Resource):
     parser.add_argument('password')
     parser.add_argument('email')
     parser.add_argument('displayName')
+    parser.add_argument('permissions')
     args = parser.parse_args()
 
     test_user = User.query.get(args.username)
@@ -20,7 +21,8 @@ class Registration(Resource):
 
     password = bcrypt_sha256.hash(args.password)
     try:
-      user = User(args.username, password, args.display_name, args.email, None, None)
+      user = User(args.username, password, args.display_name,
+                  args.email, None, None, args.permissions)
       db.session.add(user)
       db.session.commit()
     except InvalidRequestError:
