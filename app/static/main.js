@@ -9,7 +9,7 @@ var spa;
 
 window.addEventListener("load", function() {
   let href = window.location.href.indexOf("#") > -1 ? window.location.href.substr(0, window.location.href.indexOf("#")) : window.location.href;
-  window.addEventListener("popstate", routing);
+  window.addEventListener("hashchange", routing);
   routing();
 
   function routing() {
@@ -38,12 +38,50 @@ window.addEventListener("load", function() {
 
   spa = document.querySelector("#spa");
   function loginScreen() {
-    let loginFormDiv = document.querySelector(".login-form div");
-    while (loginFormDiv.firstChild) {
-      loginFormDiv.removeChild(loginFormDiv.firstChild);
+    let spa = document.querySelector("#spa");
+    while (spa.firstChild) {
+      spa.removeChild(spa.firstChild);
     }
 
-    let loginButton = document.querySelector("#login-button");
+    let form = document.createElement("form");
+    form.classList.add("login-form");
+    let div = document.createElement("div");
+
+    let headline = document.createElement("h1");
+    headline.textContent = "Scrubjay";
+    div.appendChild(headline);
+
+    let loginMessage = document.createElement("p");
+    loginMessage.classList.add("login-message");
+    div.appendChild(loginMessage);
+
+    let errorMessage = document.createElement("p");
+    errorMessage.classList.add("login-error-message");
+    div.appendChild(errorMessage);
+
+    let usernameLabel = document.createElement("label");
+    usernameLabel.setAttribute("for", "username");
+    usernameLabel.textContent = "Username:";
+    div.appendChild(usernameLabel);
+
+    let username = document.createElement("input");
+    username.setAttribute("id", "username");
+    username.setAttribute("type", "text");
+    div.appendChild(username);
+
+    let passwordLabel = document.createElement("label");
+    passwordLabel.setAttribute("for", "password");
+    passwordLabel.textContent = "Password:";
+    div.appendChild(passwordLabel);
+
+    let password = document.createElement("input");
+    password.setAttribute("id", "password");
+    password.setAttribute("type", "password");
+    div.appendChild(password);
+
+    let loginButton = document.createElement("button");
+    loginButton.setAttribute("id", "login-button");
+    loginButton.textContent = "Login";
     loginButton.addEventListener("click", function(event) {
       event.preventDefault();
       
@@ -61,16 +99,36 @@ window.addEventListener("load", function() {
         },
         body: JSON.stringify(body)
       }).then((result) => {
-        console.log(result);
+        console.log(result);        
       });
     });
+    div.appendChild(loginButton);
+
+    let forgottenPassword = document.createElement("a");
+    forgottenPassword.href = "#forgotten";
+    forgottenPassword.textContent = "Password reminder";
+    div.appendChild(forgottenPassword);
+    
+    if (registrationAllowed || null) {
+      let registerLink = document.createElement("a");
+      registerLink.href = "#register";
+      registerLink.textContent = "register";
+      div.appendChild(registerLink);
+    }
+    form.appendChild(div);
+    spa.appendChild(form);
   }
 
   function forgottenScreen() {
-    let loginFormDiv = document.querySelector(".login-form div");
-    while (loginFormDiv.firstChild) {
-      loginFormDiv.removeChild(loginFormDiv.firstChild);
+    let spa = document.querySelector("#spa");
+    while (spa.firstChild) {
+      spa.removeChild(spa.firstChild);
     }
+
+    let form = document.createElement("form");
+    form.classList.add("login-form");
+    let div = document.createElement("div");
+
     let forgottenMessage = document.createElement("p");
     forgottenMessage.setAttribute("class", "login-message");
     forgottenMessage.textContent = "Please, enter your email which you used during registration";
@@ -94,16 +152,22 @@ window.addEventListener("load", function() {
       });
     });
 
-    loginFormDiv.appendChild(forgottenMessage);
-    loginFormDiv.appendChild(registrationEmail);
-    loginFormDiv.appendChild(forgottenButton);
+    div.appendChild(forgottenMessage);
+    div.appendChild(registrationEmail);
+    div.appendChild(forgottenButton);
+    form.appendChild(div);
+    spa.appendChild(form);
   }
 
   function registerScreen() {
-    let loginFormDiv = document.querySelector(".login-form div");
-    while (loginFormDiv.firstChild) {
-      loginFormDiv.removeChild(loginFormDiv.firstChild);
+    let spa = document.querySelector("#spa");
+    while (spa.firstChild) {
+      spa.removeChild(spa.firstChild);
     }
+
+    let form = document.createElement("form");
+    form.classList.add("login-form");
+    let div = document.createElement("div");
     
     let usernameLabel = document.createElement("label");
     usernameLabel.setAttribute("for", "username");
@@ -113,8 +177,8 @@ window.addEventListener("load", function() {
     username.setAttribute("type", "text");
     username.setAttribute("id", "username");
 
-    loginFormDiv.appendChild(usernameLabel);
-    loginFormDiv.appendChild(username);
+    div.appendChild(usernameLabel);
+    div.appendChild(username);
 
     let displayNameLabel = document.createElement("label");
     displayNameLabel.setAttribute("for", "display-name");
@@ -124,8 +188,8 @@ window.addEventListener("load", function() {
     displayName.setAttribute("type", "text");
     displayName.setAttribute("id", "display-name");
 
-    loginFormDiv.appendChild(displayNameLabel);
-    loginFormDiv.appendChild(displayName);
+    div.appendChild(displayNameLabel);
+    div.appendChild(displayName);
 
     let passwordLabel = document.createElement("label");
     passwordLabel.setAttribute("for", "password");
@@ -135,8 +199,8 @@ window.addEventListener("load", function() {
     password.setAttribute("type", "password");
     password.setAttribute("id", "password");
 
-    loginFormDiv.appendChild(passwordLabel);
-    loginFormDiv.appendChild(password);
+    div.appendChild(passwordLabel);
+    div.appendChild(password);
 
     let emailLabel = document.createElement("label");
     emailLabel.setAttribute("for", "email");
@@ -146,8 +210,8 @@ window.addEventListener("load", function() {
     email.setAttribute("type", "email");
     email.setAttribute("id", "email");
 
-    loginFormDiv.appendChild(emailLabel);
-    loginFormDiv.appendChild(email);
+    div.appendChild(emailLabel);
+    div.appendChild(email);
 
     let registerButton = document.createElement("button");
     registerButton.textContent = "Register";
@@ -166,12 +230,15 @@ window.addEventListener("load", function() {
         },
         body: JSON.stringify(requestBody)
       }).then(result => {
-        history.pushState({}, "Login", "#login");
+        createAdminUser = false;
+        window.location.href = href + "#login";      
       });
       
     });
-    loginFormDiv.appendChild(registerButton);
+    div.appendChild(registerButton);
 
+    form.appendChild(div);
+    spa.appendChild(form);
   }
 
   function settingsScreen() {

@@ -3,6 +3,7 @@ from sqlalchemy.exc import InvalidRequestError
 from passlib.hash import bcrypt_sha256
 
 from app.authentication.models import User
+from app.settings.models import Setting
 from app import db
 
 class Registration(Resource):
@@ -21,15 +22,18 @@ class Registration(Resource):
 
     test_user = User.query.get(args.username)
     if (test_user is not None):
-      return "{'registrationError': true, 'userExists': true}"
+      return "{'registrationError': true, 'userExists': true}", 409
 
     password = bcrypt_sha256.hash(args.password)
     try:
       user = User(args.username, password, args.displayName,
                   args.email, None, None, permissions)
       db.session.add(user)
+      
+      setting = Setting("configured", "true")
+      db.session.add(setting)
       db.session.commit()
     except InvalidRequestError:
-      return "{'registrationError': true, 'databaseError': true}"
+      return "{'registrationError': true, 'databaseError': true}", 409
 
-    return "{'registrationError': false}"
+    return "{'registrationError': false}", 201

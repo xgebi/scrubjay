@@ -5,31 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Scrubjay - Data gathering tool</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="static/main.css" />
-  <script src="static/main.js"></script> 
+  <link rel="stylesheet" type="text/css" media="screen" href="static/main.css" />  
   {% if not configured %}
   <script type="application/javascript">
-    history.pushState({}, "Register Admin", "#register");
     var createAdminUser = true;
+    if (createAdminUser) {
+      history.pushState({}, "Register Admin", "#register");
+    }
+    var registrationAllowed = false;
+  </script>
+  {% endif %}
+  {% if configured %}
+  <script type="application/javascript">
+    var registrationAllowed = false;
   </script>
   {% endif %}
 </head>
 <body>
   <main id="spa">    
-    <form class="login-form">
-      <div>
-        <h1>Scrubjay</h1>
-        <p class="login-message">Please, log in</p>
-        <p class="login-error-message">This is an error message</p>
-        <label for="username">Username:</label>
-        <input id="username" type="text" />
-        <label for="password">Password:</label>
-        <input id="password" type="password" />
-        <button id="login-button">Log in</button>
-        <a href="#forgotten">Password reminder</a>
-        <a href="#register">Register</a>
-      </div>
-    </form>
   </main>
+  <script src="static/main.js"></script> 
 </body>
 </html>
