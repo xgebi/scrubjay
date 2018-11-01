@@ -8,19 +8,22 @@ var notLoggedIn = true;
 var spa;
 
 window.addEventListener("load", function() {
+  let spa = document.querySelector("#spa");
   let href = window.location.href.indexOf("#") > -1 ? window.location.href.substr(0, window.location.href.indexOf("#")) : window.location.href;
   window.addEventListener("hashchange", routing);
   routing();
 
   function routing() {
     if (!notLoggedIn) {
-      switch (window.location.hash) {
-        case "#settings":
-          settingsScreen();
-          break;
-
-        default: errorScreen();
-      }
+      if (window.location.hash.startsWith("#dashboard")) {
+        dashboardScreen();
+      } else if (window.location.hash.startsWith("#settings")) {
+        settingsScreen();
+      }  else if (window.location.hash.startsWith("#dataset")) {
+        datasetScreen();
+      } else if (window.location.hash.startsWith("#datapoint")) {
+        datapointScreen();
+      } 
     } else {
       switch (window.location.hash) {
         case "#register":
@@ -31,17 +34,17 @@ window.addEventListener("load", function() {
           break;
         case "#password-reset":
           break;
-        default: loginScreen();        
+        case "#login":
+          loginScreen();
+          break;
+        default: window.location.hash = "#login";
       }
     }
   }
 
   spa = document.querySelector("#spa");
   function loginScreen() {
-    let spa = document.querySelector("#spa");
-    while (spa.firstChild) {
-      spa.removeChild(spa.firstChild);
-    }
+    cleanSpa(spa);
 
     let form = document.createElement("form");
     form.classList.add("login-form");
@@ -99,7 +102,16 @@ window.addEventListener("load", function() {
         },
         body: JSON.stringify(body)
       }).then((result) => {
-        console.log(result);        
+        if (result.status >= 200 && result.status < 300) {
+          notLoggedIn = false;
+          window.location.href = href + "#dashboard";
+        }
+        if (result.status === 401) {
+          notLoggedIn = true;
+          let form = document.querySelector("form");
+          form.classList.add("login-error");
+          errorMessage.textContent = "Invalid credentials";
+        }       
       });
     });
     div.appendChild(loginButton);
@@ -120,10 +132,7 @@ window.addEventListener("load", function() {
   }
 
   function forgottenScreen() {
-    let spa = document.querySelector("#spa");
-    while (spa.firstChild) {
-      spa.removeChild(spa.firstChild);
-    }
+    cleanSpa(spa);
 
     let form = document.createElement("form");
     form.classList.add("login-form");
@@ -160,10 +169,7 @@ window.addEventListener("load", function() {
   }
 
   function registerScreen() {
-    let spa = document.querySelector("#spa");
-    while (spa.firstChild) {
-      spa.removeChild(spa.firstChild);
-    }
+    cleanSpa(spa);
 
     let form = document.createElement("form");
     form.classList.add("login-form");
@@ -241,6 +247,10 @@ window.addEventListener("load", function() {
     spa.appendChild(form);
   }
 
+  function dashboardScreen() {
+    cleanSpa(spa);
+  }
+
   function settingsScreen() {
 
   }
@@ -249,6 +259,12 @@ window.addEventListener("load", function() {
     let main = document.querySelector("main");
     while (main.firstChild) {
       main.removeChild(main.firstChild);
+    }
+  }
+
+  function cleanSpa(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
     }
   }
 });

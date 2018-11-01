@@ -20,12 +20,12 @@ class Authentication(Resource):
       try:      
         db.session.commit()
       except InvalidRequestError:
-        return {'loginError': true, 'databaseError': true}, 401
-      return {'loginError': 'false'}, 200, {'Authorization': '"Custom ' + user.username + ' ' + user.current_session_uid+'"'}
+        return {'loginError': True, 'databaseError': True}, 401
+      return {'loginError': False}, 200, {'Authorization': '"Custom ' + user.username + ' ' + user.current_session_uid+'"'}
     else:
-      return { 'loginError': true, 'invalidCredentials': true }, 401
+      return { 'loginError': True, 'invalidCredentials': True }, 401
 
-    return { 'loginError': true }, 401
+    return { 'loginError': True }, 401
 
   def verify_session(username, session_id):
     return false
